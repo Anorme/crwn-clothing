@@ -1,7 +1,8 @@
 import { Outlet, Link } from "react-router-dom";
 
-import './navigation.styles.scss';
 import CrownLogo from '../../assets/crown.svg?react';
+
+import './navigation.styles.scss';
 
 const Navigation = () => {
   return (
