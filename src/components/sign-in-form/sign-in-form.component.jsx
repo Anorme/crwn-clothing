@@ -6,6 +6,7 @@ import Button from "../button/button.component";
 import { 
   signInWithGooglePopup, 
   createUserDocumentFromAuth,
+  signInAuthUserWithEmailAndPassword
 } from "../../utils/firebase/firebase.utils";
 
 import './sign-in-form.styles.scss';
@@ -34,9 +35,14 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
+      const response = await signInAuthUserWithEmailAndPassword(email, password);
+      console.log(response);
       resetFormFields()
 
     } catch(error) {
+      if(error.code === "auth/invalid-credential") {
+        alert("Invalid user credentials")
+      }
       console.log('User signin encountered an error',error);
     }
   }
@@ -69,8 +75,10 @@ const SignInForm = () => {
           value={password}
         />
 
-        <Button type="submit">Sign In</Button>
-        <Button buttonType='google' onClick={signInWithGoogle} >Google Sign In</Button>
+        <div className="buttons-container">
+          <Button type="submit">Sign In</Button>
+          <Button type='button' buttonType='google' onClick={signInWithGoogle} >Google Sign In</Button>
+        </div>
       </form>
     </div>
   );
