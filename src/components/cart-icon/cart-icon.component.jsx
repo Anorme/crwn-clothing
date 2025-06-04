@@ -1,6 +1,6 @@
 import ShoppingIcon from '../../assets/shopping-bag.svg?react';
 
-import './cart-icon.component.scss';
+import './cart-icon.styles.scss';
 
 const CartIcon = () => {
 
