@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 function checkIsExistingCartItem (cartItems, productToAdd) {
   return cartItems.find(
@@ -91,10 +92,13 @@ export const CartProvider = ({ children }) => {
       return totalPrice + (cartItem.price * cartItem.quantity);
     }, 0);
     // Dispatch new action with payload
-    dispatch({
-      type: CART_ACTION_TYPES.SET_CART_ITEMS, 
-      payload: { cartItems: newCartItems, cartCount: newCartCount, cartTotal: newCartTotal}
-    });
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, { 
+        cartItems: newCartItems, 
+        cartCount: newCartCount, 
+        cartTotal: newCartTotal
+      })
+    );
   };
 
   const addItemToCart = (productToAdd) => {
@@ -113,7 +117,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const setIsCartOpen = (bool) => {
-    dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN, payload: bool })
+    dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, bool))
   };
 
   const value = { 
